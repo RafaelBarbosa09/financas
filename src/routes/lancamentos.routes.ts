@@ -10,7 +10,7 @@ import CriarLancamentoService from "../services/CriarLancamentoService";
 const lancamentosRouter = Router();
 
 /**
- * Este método deve retornar todos os lançamentos cadastrados
+ * Este método deve retornar todos os lançamentos cadastrados.
  */
 lancamentosRouter.get('/', async (request, response) => {
 
@@ -27,7 +27,7 @@ lancamentosRouter.get('/', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por usuário
+ * Este método deve buscar todos os lançamentos cadastrados por usuário.
  * @param usuario_id
  */
 lancamentosRouter.get('/usuario/:usuario_id', async (request, response) => {
@@ -48,7 +48,7 @@ lancamentosRouter.get('/usuario/:usuario_id', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por data
+ * Este método deve buscar todos os lançamentos cadastrados por data.
  * @param data
  */
 lancamentosRouter.get('/:data', async (request, response) => {
@@ -70,7 +70,7 @@ lancamentosRouter.get('/:data', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por tipo
+ * Este método deve buscar todos os lançamentos cadastrados por tipo(RECEITA OU DESPESA).
  * @param tipo
  */
 lancamentosRouter.get('/tipo/:tipo', async (request, response) => {

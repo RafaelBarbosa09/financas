@@ -4,6 +4,10 @@ import LancamentoRepository from "../repositories/LancamentoRepository";
 
 class BuscarLancamentoPorDataService {
 
+  /**
+   * Este método deve buscar Todos os lançamentos por data.
+   * @param data 
+   */
   public async buscarPorData(data: Date): Promise<Lancamento[] | null> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);

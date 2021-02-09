@@ -11,6 +11,14 @@ interface ILancamento {
   usuario_id: string;
 }
 
+/**
+ * Este método deve cadastrar um lançamento
+ * @param descricao
+ * @param data
+ * @param valor
+ * @param tipo
+ * @param usuario_id
+ */
 class CriarLancamentoService {
   public async salvar({ descricao, data, valor, tipo, usuario_id }: ILancamento): Promise<Lancamento> {
 

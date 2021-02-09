@@ -11,6 +11,13 @@ interface IUsuario {
 
 class CriarUsuarioService {
 
+  /**
+   * 
+   * Este método deve cadastrar um usuário
+   * @param nome
+   * @param email
+   * @param senha 
+   */
   public async salvar({ nome, email, senha }: IUsuario): Promise<Usuario> {
 
     const usuarioRepository = getCustomRepository(UsuarioRepository);

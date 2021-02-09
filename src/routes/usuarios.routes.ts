@@ -3,6 +3,9 @@ import CriarUsuarioService from "../services/CriarUsuarioService";
 
 const usuariosRouter = Router();
 
+/**
+ * Este método deve cadastrar um usuário
+ */
 usuariosRouter.post('/', async (request, response) => {
   try {
     const { nome, email, senha} = request.body;

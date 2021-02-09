@@ -4,6 +4,9 @@ import LancamentoRepository from "../repositories/LancamentoRepository";
 
 class BuscarLancamentoService {
 
+  /**
+   * Este método deve buscar todos os lançamentos cadastrados.
+   */
   public async buscarTodos(): Promise<Lancamento[] | null> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
