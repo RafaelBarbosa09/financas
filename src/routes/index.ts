@@ -1,9 +1,9 @@
 import { Router } from "express";
 
-import financasRouter from './financas.routes';
+import lancamentosRouter from './lancamentos.routes';
 
 const routes = Router();
 
-routes.use('/financas', financasRouter);
+routes.use('/lancamentos', lancamentosRouter);
 
 export default routes;
