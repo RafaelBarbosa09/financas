@@ -15,6 +15,12 @@ class CriarUsuarioService {
 
     const usuarioRepository = getCustomRepository(UsuarioRepository);
 
+    const usuarioExistente = await usuarioRepository.findOne({where: {email}});
+
+    if(usuarioExistente) {
+      throw new Error('E-mail já cadastrado');
+    }
+
     const usuario = usuarioRepository.create({
       nome, 
       email, 

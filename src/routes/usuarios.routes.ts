@@ -16,8 +16,8 @@ usuariosRouter.post('/', async (request, response) => {
     });
 
     return response.json(usuario);
-  } catch (error) {
-    return response.status(400).json({error: 'Erro ao tentar cadastrar'});
+  } catch (e) {
+    return response.status(400).json({error: e.message});
   }
 });
 
