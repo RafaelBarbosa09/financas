@@ -1,21 +1,22 @@
 import { getCustomRepository } from "typeorm";
+
 import Lancamento from "../models/Lancamento";
 import LancamentoRepository from "../repositories/LancamentoRepository";
 
-class BuscarLancamentoPorDataService {
+class BuscarLancamentoPorTipoService {
 
-  public async buscarPorData(data: Date): Promise<Lancamento[] | null> {
+  public async buscarPorTipo(tipo: string): Promise<Lancamento[] | null> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
 
-    const lancamentoEncontrado = await lancamentoRepository.buscarPorData(data);
+    const lancamentos = await lancamentoRepository.buscarPorTipo(tipo);
 
-    if(!lancamentoEncontrado) {
+    if(!lancamentos) {
       throw new Error('Lançamento não encontrado.');
     }
 
-    return lancamentoEncontrado || null;
+    return lancamentos || null;
   }
 }
 
-export default BuscarLancamentoPorDataService;
+export default BuscarLancamentoPorTipoService;

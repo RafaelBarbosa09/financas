@@ -2,6 +2,7 @@ import { parseISO } from "date-fns";
 import { Router } from "express";
 
 import BuscarLancamentoPorDataService from "../services/BuscarLancamentoPorDataService";
+import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoService";
 import BuscarLancamentoService from "../services/BuscarLancamentosService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
 
@@ -25,7 +26,7 @@ lancamentosRouter.get('/', async (request, response) => {
 });
 
 /**
- * Este método deve buscar um lançamento cadastrado por data
+ * Este método deve buscar todos os lançamentos cadastrados por data
  * @param data
  */
 lancamentosRouter.get('/:data', async (request, response) => {
@@ -40,6 +41,27 @@ lancamentosRouter.get('/:data', async (request, response) => {
     const lancamento = await buscarLancamentoPorDataService.buscarPorData(dataFormatada);
     
     response.json({lancamento});
+  } catch (e) {
+    return response.status(400).json({error: e.message});
+  }
+
+});
+
+/**
+ * Este método deve buscar todos os lançamentos cadastrados por tipo
+ * @param tipo
+ */
+lancamentosRouter.get('/tipo/:tipo', async (request, response) => {
+
+  try {
+
+    const { tipo } = request.params;
+
+    const buscarLancamentoPorTipoService = new BuscarLancamentoPorTipoService();
+
+    const lancamentos = await buscarLancamentoPorTipoService.buscarPorTipo(tipo);
+    
+    response.json({lancamentos});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }

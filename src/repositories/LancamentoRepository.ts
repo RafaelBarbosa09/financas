@@ -4,10 +4,20 @@ import Lancamento from "../models/Lancamento";
 @EntityRepository(Lancamento)
 class LancamentoRepository extends Repository<Lancamento> {
 
-  public async buscarPorData(data: Date): Promise<Lancamento | null>{
+  public async buscarPorData(data: Date): Promise<Lancamento[] | null>{
 
-    const lancamentoEncontrado = await this.findOne({
+    const lancamentoEncontrado = await this.find({
       where: {data}
+    });
+
+    return lancamentoEncontrado || null;
+
+  }
+
+  public async buscarPorTipo(tipo: string): Promise<Lancamento[] | null>{
+
+    const lancamentoEncontrado = await this.find({
+      where: {tipo}
     });
 
     return lancamentoEncontrado || null;
