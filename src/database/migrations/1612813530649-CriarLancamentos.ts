@@ -30,18 +30,14 @@ export default class CriarLancamentos1612813530649 implements MigrationInterface
                         name: 'tipo',
                         type: 'varchar',
                     },
+                    {
+                        name: 'usuario_id',
+                        type: 'uuid',
+                    },
+                    
                 ]
             })
         );
-
-        /*await queryRunner.createForeignKey('lancamento', new TableForeignKey({
-            name: 'lancamentoHasUsuario',
-            columnNames: ['usuario_id'],
-            referencedColumnNames: ['id'],
-            referencedTableName: 'usuario',
-            onDelete: 'CASCADE',
-            onUpdate: 'CASCADE',
-        }));*/
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {

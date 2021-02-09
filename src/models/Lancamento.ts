@@ -1,4 +1,5 @@
-import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+import Usuario from "./Usuario";
 
 @Entity('lancamento')
 class Lancamento {
@@ -17,6 +18,14 @@ class Lancamento {
 
   @Column()
   tipo: string
+
+  //erro
+  @Column()
+  usuario_id: string
+
+  @JoinColumn({ name: 'usuario_id' })
+  @ManyToOne(type => Usuario, usuario => usuario.lancamentos)
+  usuario: Usuario
 }
 
 export default Lancamento;

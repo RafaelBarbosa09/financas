@@ -3,6 +3,7 @@ import { Router } from "express";
 
 import BuscarLancamentoPorDataService from "../services/BuscarLancamentoPorDataService";
 import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoService";
+import BuscarLancamentoPorUsuarioService from "../services/BuscarLancamentoPorUsuarioService";
 import BuscarLancamentoService from "../services/BuscarLancamentosService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
 
@@ -17,6 +18,27 @@ lancamentosRouter.get('/', async (request, response) => {
     const buscarLancamentoService = new BuscarLancamentoService();
 
     const lancamentos = await buscarLancamentoService.buscarTodos();
+    
+    response.json({lancamentos});
+  } catch (e) {
+    return response.status(400).json({error: e.message});
+  }
+
+});
+
+/**
+ * Este método deve buscar todos os lançamentos cadastrados por usuário
+ * @param usuario_id
+ */
+lancamentosRouter.get('/usuario/:usuario_id', async (request, response) => {
+
+  try {
+
+    const { usuario_id } = request.params;
+
+    const buscarLancamentoPorUsuarioService = new BuscarLancamentoPorUsuarioService();
+
+    const lancamentos = await buscarLancamentoPorUsuarioService.buscarPorUsuario(usuario_id);
     
     response.json({lancamentos});
   } catch (e) {
@@ -74,14 +96,15 @@ lancamentosRouter.get('/tipo/:tipo', async (request, response) => {
 lancamentosRouter.post('/', async (request, response) => {
 
   try {
-    const { descricao, data, valor, tipo } = request.body;
+    const { descricao, data, valor, tipo, usuario_id } = request.body;
     const criarLancamentoService = new CriarLancamentoService();
   
     const lancamento = await criarLancamentoService.salvar({
       descricao, 
       data, 
       valor, 
-      tipo
+      tipo,
+      usuario_id
     });
 
     return response.json(lancamento);

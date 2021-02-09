@@ -24,6 +24,16 @@ class LancamentoRepository extends Repository<Lancamento> {
 
   }
 
+  public async buscarPorUsuario(usuario_id: string): Promise<Lancamento[] | null>{
+
+    const lancamentoEncontrado = await this.find({
+      where: {usuario_id}
+    });
+
+    return lancamentoEncontrado || null;
+
+  }
+
 }
 
 export default LancamentoRepository;
