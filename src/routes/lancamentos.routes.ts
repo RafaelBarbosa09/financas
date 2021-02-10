@@ -17,7 +17,7 @@ lancamentosRouter.use(verificaAutenticacao);
 /**
  * Este método deve retornar todos os lançamentos cadastrados.
  */
-lancamentosRouter.get('/', async (request, response) => {
+lancamentosRouter.get('/all', async (request, response) => {
 
   try {
     const buscarLancamentoService = new BuscarLancamentoService();
@@ -33,9 +33,8 @@ lancamentosRouter.get('/', async (request, response) => {
 
 /**
  * Este método deve buscar todos os lançamentos cadastrados por usuário logado.
- * @param usuario_id
  */
-lancamentosRouter.get('/usuario/', async (request, response) => {
+lancamentosRouter.get('/', async (request, response) => {
 
   try {
 
@@ -101,7 +100,9 @@ lancamentosRouter.get('/tipo/:tipo', async (request, response) => {
 lancamentosRouter.post('/', async (request, response) => {
 
   try {
-    const { descricao, data, valor, tipo, usuario_id } = request.body;
+    const { descricao, data, valor, tipo } = request.body;
+    const usuario_id = request.user.id;
+
     const criarLancamentoService = new CriarLancamentoService();
   
     const lancamento = await criarLancamentoService.salvar({
