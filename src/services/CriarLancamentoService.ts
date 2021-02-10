@@ -23,9 +23,6 @@ class CriarLancamentoService {
   public async salvar({ descricao, data, valor, tipo, usuario_id }: ILancamento): Promise<Lancamento> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
-    const usuarioRepository = getCustomRepository(UsuarioRepository);
-
-    const usuarioEncontrado = usuarioRepository.findOne(usuario_id);
 
     const lancamento = await lancamentoRepository.create({
       descricao, 

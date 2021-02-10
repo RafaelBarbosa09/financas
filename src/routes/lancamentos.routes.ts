@@ -1,6 +1,8 @@
 import { parseISO } from "date-fns";
 import { Router } from "express";
 
+import verificaAutenticacao from '../middlewares/VerificaAutenticacao';
+
 import BuscarLancamentoPorDataService from "../services/BuscarLancamentoPorDataService";
 import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoService";
 import BuscarLancamentoPorUsuarioService from "../services/BuscarLancamentoPorUsuarioService";
@@ -8,6 +10,9 @@ import BuscarLancamentoService from "../services/BuscarLancamentosService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
 
 const lancamentosRouter = Router();
+
+//todas as rotas precisam atender a esse middleware.
+lancamentosRouter.use(verificaAutenticacao);
 
 /**
  * Este método deve retornar todos os lançamentos cadastrados.
@@ -27,14 +32,14 @@ lancamentosRouter.get('/', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por usuário.
+ * Este método deve buscar todos os lançamentos cadastrados por usuário logado.
  * @param usuario_id
  */
-lancamentosRouter.get('/usuario/:usuario_id', async (request, response) => {
+lancamentosRouter.get('/usuario/', async (request, response) => {
 
   try {
 
-    const { usuario_id } = request.params;
+    const usuario_id = request.user.id;
 
     const buscarLancamentoPorUsuarioService = new BuscarLancamentoPorUsuarioService();
 
