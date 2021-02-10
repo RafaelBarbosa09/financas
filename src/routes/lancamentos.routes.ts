@@ -52,19 +52,19 @@ lancamentosRouter.get('/', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por data.
+ * Este método deve buscar todos os lançamentos do usuário logado por data.
  * @param data
  */
 lancamentosRouter.get('/:data', async (request, response) => {
 
   try {
-
     const { data } = request.params;
+    const usuario_id = request.user.id;
     const dataFormatada = parseISO(data);
 
     const buscarLancamentoPorDataService = new BuscarLancamentoPorDataService();
 
-    const lancamento = await buscarLancamentoPorDataService.buscarPorData(dataFormatada);
+    const lancamento = await buscarLancamentoPorDataService.buscarPorData(dataFormatada, usuario_id);
     
     response.json({lancamento});
   } catch (e) {
@@ -74,18 +74,18 @@ lancamentosRouter.get('/:data', async (request, response) => {
 });
 
 /**
- * Este método deve buscar todos os lançamentos cadastrados por tipo(RECEITA OU DESPESA).
+ * Este método deve buscar todos os lançamentos do usuário logado por tipo(RECEITA OU DESPESA).
  * @param tipo
  */
 lancamentosRouter.get('/tipo/:tipo', async (request, response) => {
 
   try {
-
     const { tipo } = request.params;
+    const usuario_id = request.user.id;
 
     const buscarLancamentoPorTipoService = new BuscarLancamentoPorTipoService();
 
-    const lancamentos = await buscarLancamentoPorTipoService.buscarPorTipo(tipo);
+    const lancamentos = await buscarLancamentoPorTipoService.buscarPorTipo(tipo, usuario_id);
     
     response.json({lancamentos});
   } catch (e) {

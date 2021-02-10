@@ -8,10 +8,10 @@ class LancamentoRepository extends Repository<Lancamento> {
    * Este método deve buscar todos os lançamentos por data.
    * @param data 
    */
-  public async buscarPorData(data: Date): Promise<Lancamento[] | null>{
+  public async buscarPorData(data: Date, usuario_id: string): Promise<Lancamento[] | null>{
 
     const lancamentoEncontrado = await this.find({
-      where: {data}
+      where: {data, usuario_id}
     });
 
     return lancamentoEncontrado || null;
@@ -22,10 +22,10 @@ class LancamentoRepository extends Repository<Lancamento> {
    * Este método deve buscar todos os lançamentos por tipo(RECEITA OU DESPESA).
    * @param tipo 
    */
-  public async buscarPorTipo(tipo: string): Promise<Lancamento[] | null>{
+  public async buscarPorTipo(tipo: string, usuario_id: string): Promise<Lancamento[] | null>{
 
     const lancamentoEncontrado = await this.find({
-      where: {tipo}
+      where: {tipo, usuario_id}
     });
 
     return lancamentoEncontrado || null;
