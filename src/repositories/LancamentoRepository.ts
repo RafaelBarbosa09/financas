@@ -1,4 +1,5 @@
 import { EntityRepository, Repository } from "typeorm";
+
 import Lancamento from "../models/Lancamento";
 
 @EntityRepository(Lancamento)
@@ -38,14 +39,15 @@ class LancamentoRepository extends Repository<Lancamento> {
    */
   public async buscarPorUsuario(usuario_id: string): Promise<Lancamento[] | null>{
 
-    const lancamentoEncontrado = await this.find({
+    const lancamentosEncontrados = await this.find({
       where: {usuario_id}
     });
 
-    return lancamentoEncontrado || null;
+    console.log(lancamentosEncontrados)
+
+    return lancamentosEncontrados || null;
 
   }
-
 }
 
 export default LancamentoRepository;

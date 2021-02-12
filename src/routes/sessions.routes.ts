@@ -11,6 +11,9 @@ interface ISession {
   alterado_em: Date;
 }
 
+/**
+ * Este método deve criar uma sessão para gerar o token do usuário logado.
+ */
 sessionsRouter.post('/', async (request, response) => {
   try {
     const { email, senha } = request.body;

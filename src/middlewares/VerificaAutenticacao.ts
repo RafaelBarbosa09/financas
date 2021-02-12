@@ -9,11 +9,7 @@ interface TokenPayload {
   sub: string;
 }
 
-export default function VerificaAutenticacao(
-  request: Request, 
-  response: Response, 
-  next: NextFunction
-): void {
+export default function VerificaAutenticacao(request: Request, response: Response, next: NextFunction): void {
 
   const autorizacaoHeader = request.headers.authorization;
 

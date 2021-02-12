@@ -1,7 +1,7 @@
 import { getCustomRepository } from "typeorm";
+
 import Lancamento from "../models/Lancamento";
 import LancamentoRepository from "../repositories/LancamentoRepository";
-import UsuarioRepository from "../repositories/UsuarioRepository";
 
 interface ILancamento {
   descricao: string;
@@ -11,6 +11,8 @@ interface ILancamento {
   usuario_id: string;
 }
 
+class CriarLancamentoService {
+
 /**
  * Este método deve cadastrar um lançamento
  * @param descricao
@@ -19,7 +21,6 @@ interface ILancamento {
  * @param tipo
  * @param usuario_id
  */
-class CriarLancamentoService {
   public async salvar({ descricao, data, valor, tipo, usuario_id }: ILancamento): Promise<Lancamento> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);

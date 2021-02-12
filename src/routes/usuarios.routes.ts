@@ -1,6 +1,7 @@
-import { isSameQuarter } from "date-fns";
 import { Router } from "express";
+
 import CriarUsuarioService from "../services/CriarUsuarioService";
+
 
 const usuariosRouter = Router();
 

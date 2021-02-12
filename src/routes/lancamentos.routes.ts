@@ -6,8 +6,8 @@ import verificaAutenticacao from '../middlewares/VerificaAutenticacao';
 import BuscarLancamentoPorDataService from "../services/BuscarLancamentoPorDataService";
 import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoService";
 import BuscarLancamentoPorUsuarioService from "../services/BuscarLancamentoPorUsuarioService";
-import BuscarLancamentoService from "../services/BuscarLancamentosService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
+import TotalDosLancamentosService from "../services/TotalDosLancamentosService";
 
 const lancamentosRouter = Router();
 
@@ -15,16 +15,18 @@ const lancamentosRouter = Router();
 lancamentosRouter.use(verificaAutenticacao);
 
 /**
- * Este método deve retornar todos os lançamentos cadastrados.
+ * Este método deve buscar o valor total de todos os lançamentos do usuário logado.
  */
-lancamentosRouter.get('/all', async (request, response) => {
+lancamentosRouter.get('/total', async (request, response) => {
 
   try {
-    const buscarLancamentoService = new BuscarLancamentoService();
+    const usuario_id = request.user.id;
 
-    const lancamentos = await buscarLancamentoService.buscarTodos();
-    
-    response.json({lancamentos});
+    const totalDosLancamentosService = new TotalDosLancamentosService();
+
+    const totalDosLancamentos = await totalDosLancamentosService.retornaTotalDosLancamentos(usuario_id);
+
+    return response.json({totalDosLancamentos});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }
@@ -44,7 +46,7 @@ lancamentosRouter.get('/', async (request, response) => {
 
     const lancamentos = await buscarLancamentoPorUsuarioService.buscarPorUsuario(usuario_id);
     
-    response.json({lancamentos});
+    return response.json({lancamentos});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }
@@ -66,7 +68,7 @@ lancamentosRouter.get('/:data', async (request, response) => {
 
     const lancamento = await buscarLancamentoPorDataService.buscarPorData(dataFormatada, usuario_id);
     
-    response.json({lancamento});
+    return response.json({lancamento});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }
@@ -87,7 +89,7 @@ lancamentosRouter.get('/tipo/:tipo', async (request, response) => {
 
     const lancamentos = await buscarLancamentoPorTipoService.buscarPorTipo(tipo, usuario_id);
     
-    response.json({lancamentos});
+    return response.json({lancamentos});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }

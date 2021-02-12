@@ -17,6 +17,12 @@ interface IUsuario {
 }
 
 class AutenticarUsuarioService {
+
+  /**
+ * Este método deve criar uma sessão para gerar o token do usuário logado.
+ * @param email
+ * @param senha 
+ */
   public async autenticar({ email, senha }: IAutenticacao): Promise<IUsuario> {
 
     const usuarioRepository = getCustomRepository(UsuarioRepository);

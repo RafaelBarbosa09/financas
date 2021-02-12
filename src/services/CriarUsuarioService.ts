@@ -10,12 +10,6 @@ interface IUsuario {
   senha: string;
 }
 
-/*interface IUsuarioOptional {
-  nome: string;
-  email: string;
-  senha?: string;
-}*/
-
 class CriarUsuarioService {
 
   /**

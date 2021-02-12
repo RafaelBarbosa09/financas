@@ -1,4 +1,5 @@
 import { Column, Entity, JoinColumn, ManyToOne, PrimaryGeneratedColumn } from "typeorm";
+
 import Usuario from "./Usuario";
 
 @Entity('lancamento')
@@ -19,7 +20,6 @@ class Lancamento {
   @Column()
   tipo: string
 
-  //erro
   @Column()
   usuario_id: string
 
