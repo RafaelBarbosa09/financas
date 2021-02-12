@@ -43,8 +43,6 @@ class LancamentoRepository extends Repository<Lancamento> {
       where: {usuario_id}
     });
 
-    console.log(lancamentosEncontrados)
-
     return lancamentosEncontrados || null;
 
   }
