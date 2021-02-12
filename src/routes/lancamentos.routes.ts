@@ -8,6 +8,7 @@ import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoS
 import BuscarLancamentoPorUsuarioService from "../services/BuscarLancamentoPorUsuarioService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
 import RetornaTotalDeDespesas from "../services/RetornaTotalDeDespesas";
+import RetornaTotalDeReceitas from "../services/RetornaTotalDeReceitas";
 import TotalDosLancamentosService from "../services/TotalDosLancamentosService";
 
 const lancamentosRouter = Router();
@@ -35,7 +36,7 @@ lancamentosRouter.get('/total', async (request, response) => {
 });
 
 /**
- * Este método deve buscar o valor total de todos os lançamentos do usuário logado.
+ * Este método deve buscar o valor total de todas as despesas do usuário logado.
  */
 lancamentosRouter.get('/despesas/total', async (request, response) => {
 
@@ -47,6 +48,25 @@ lancamentosRouter.get('/despesas/total', async (request, response) => {
     const totalDeDespesas = await totalDeDespesasService.retornaTotalDeDespesas(usuario_id);
 
     return response.json({totalDeDespesas});
+  } catch (e) {
+    return response.status(400).json({error: e.message});
+  }
+
+});
+
+/**
+ * Este método deve buscar o valor total de todas as receitas do usuário logado.
+ */
+lancamentosRouter.get('/receitas/total', async (request, response) => {
+
+  try {
+    const usuario_id = request.user.id;
+
+    const totalDeReceitasService = new RetornaTotalDeReceitas();
+
+    const totalDeReceitas = await totalDeReceitasService.retornaTotalDeReceitas(usuario_id);
+
+    return response.json({totalDeReceitas});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }
