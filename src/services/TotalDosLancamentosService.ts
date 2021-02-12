@@ -8,7 +8,7 @@ class TotalDosLancamentosService {
    * Este método deve retornar o valor total de todos os lançamentos por usuário logado.
    * @param usuario_id 
    */
-  public async retornaTotalDosLancamentos(usuario_id: string): Promise<number> {
+  public async retornaTotalDosLancamentos(usuario_id: string): Promise<string> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
     const lancamentos = await lancamentoRepository.buscarPorUsuario(usuario_id);
@@ -32,7 +32,9 @@ class TotalDosLancamentosService {
       total = receita - despesa;
     });
 
-    return total;
+    const totalFormadato = (total).toLocaleString('pt-BR');
+
+    return totalFormadato;
   }
 }
 

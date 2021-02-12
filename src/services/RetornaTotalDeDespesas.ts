@@ -8,7 +8,7 @@ class RetornaTotalDeDespesas {
    * Este método deve retornar o valor total de todas as despesas por usuário logado.
    * @param usuario_id 
    */
-  public async retornaTotalDeDespesas(usuario_id: string): Promise<number> {
+  public async retornaTotalDeDespesas(usuario_id: string): Promise<string> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
     const lancamentos = await lancamentoRepository.buscarPorUsuario(usuario_id);
@@ -25,7 +25,9 @@ class RetornaTotalDeDespesas {
       }
     });
 
-    return despesa;
+    const totalFormadato = (despesa).toLocaleString('pt-BR');
+
+    return totalFormadato;
   }
 }
 

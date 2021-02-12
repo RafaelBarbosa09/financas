@@ -8,7 +8,7 @@ class RetornaTotalDeReceitas {
    * Este método deve retornar o valor total de todas as receitas por usuário logado.
    * @param usuario_id 
    */
-  public async retornaTotalDeReceitas(usuario_id: string): Promise<number> {
+  public async retornaTotalDeReceitas(usuario_id: string): Promise<string> {
 
     const lancamentoRepository = getCustomRepository(LancamentoRepository);
     const lancamentos = await lancamentoRepository.buscarPorUsuario(usuario_id);
@@ -25,7 +25,9 @@ class RetornaTotalDeReceitas {
       }
     });
 
-    return receita;
+    const totalFormadato = (receita).toLocaleString('pt-BR');
+
+    return totalFormadato;
   }
 }
 
