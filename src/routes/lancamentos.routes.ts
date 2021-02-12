@@ -7,6 +7,7 @@ import BuscarLancamentoPorDataService from "../services/BuscarLancamentoPorDataS
 import BuscarLancamentoPorTipoService from "../services/BuscarLancamentoPorTipoService";
 import BuscarLancamentoPorUsuarioService from "../services/BuscarLancamentoPorUsuarioService";
 import CriarLancamentoService from "../services/CriarLancamentoService";
+import RetornaTotalDeDespesas from "../services/RetornaTotalDeDespesas";
 import TotalDosLancamentosService from "../services/TotalDosLancamentosService";
 
 const lancamentosRouter = Router();
@@ -27,6 +28,25 @@ lancamentosRouter.get('/total', async (request, response) => {
     const totalDosLancamentos = await totalDosLancamentosService.retornaTotalDosLancamentos(usuario_id);
 
     return response.json({totalDosLancamentos});
+  } catch (e) {
+    return response.status(400).json({error: e.message});
+  }
+
+});
+
+/**
+ * Este método deve buscar o valor total de todos os lançamentos do usuário logado.
+ */
+lancamentosRouter.get('/despesas/total', async (request, response) => {
+
+  try {
+    const usuario_id = request.user.id;
+
+    const totalDeDespesasService = new RetornaTotalDeDespesas();
+
+    const totalDeDespesas = await totalDeDespesasService.retornaTotalDeDespesas(usuario_id);
+
+    return response.json({totalDeDespesas});
   } catch (e) {
     return response.status(400).json({error: e.message});
   }
